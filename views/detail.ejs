@@ -12,5 +12,11 @@
     <p>duracion: <%= movie.length %></p>
     <p>premios: <%= movie.awards %></p>
     <p>fecha de estreno: <%= movie.release_date %></p>
+    <a href="/movies/edit/<%= movie.id %>">Editar Pelicula</a>
+
+    <form action="/movies/delete/<%= movie.id %>" method="POST">
+        <button>Eliminar Pelicula</button>
+    </form>
+
 </body>
 </html>

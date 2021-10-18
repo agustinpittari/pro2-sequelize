@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <form action="/movies/search" method="get">
+      <input type="text" class="text" name="search">
+      <button>Enviar</button>
+    </form>
+
+    <ul>
+      <% for(let i = 0; i < movies.length; i++) { %> 
+
+        <li>
+          <h3><a href="/movies/detail/<%= movies[i].id %>"><%= movies[i].title %></a></h3>
+          <p></p>
+        </li>
+
+      <% } %>
+    </ul>
+  </body>
+</html>

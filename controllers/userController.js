@@ -35,7 +35,11 @@ let userController = {
             if(user != undefined){
                 let passwordCorrecta = bcrypt.compareSync(req.body.password, user.password)
                 if(passwordCorrecta == true){
-                    res.send("Bienvenido al sitio")
+                    req.session.user = user.email
+                    if(req.body.recordame){
+                        res.cookie("usuarioId", user.id, {maxAge: 1000 * 60 * 30})
+                    }
+                    res.redirect("/")
                 }else {
                     res.send("Credenciales invalidas")
                 }
@@ -46,6 +50,13 @@ let userController = {
             console.log(err);
             res.send(err)
         })
+    },
+    logout: function(req, res){
+
+        req.session.destroy()
+        res.clearCookie("usuarioId");
+
+        res.redirect("/users/login")
     }
 
 }

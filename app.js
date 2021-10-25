@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const db = require("./database/models")
+
+const session = require("express-session");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,6 +22,31 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: "Mi palabra secreta de aplicación!",
+  resave: true,
+  saveUninitialized:false
+}))
+
+app.use(function(req, res, next){
+  if(req.cookies.usuarioId != undefined && req.session.user == undefined){
+    db.User.findByPk(req.cookies.usuarioId)
+    .then(user => {
+      req.session.user = user.email
+      res.locals.user = req.session.user
+      return next()
+    })
+  }
+  return next();
+})
+
+app.use(function(req, res, next){
+  res.locals.user = null
+  if(req.session.user != undefined){
+    res.locals.user = req.session.user
+  }
+  return next()
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

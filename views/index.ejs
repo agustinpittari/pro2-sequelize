@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+  <%- include("./partials/head") %> 
 
+  <body>
+    <%- include("./partials/header") %> 
     <form action="/movies/search" method="get">
-      <label for="">Titulo</label><input type="text" class="text" name="search"><br>
-      <label for="">Rating</label><input type="number" class="text" name="rating">
-      <button>Enviar</button>
+      <input type="text" class="text" name="search" placeholder="Buscar por titulo">
+      <button>Buscar</button>
     </form>
 
     <ul>

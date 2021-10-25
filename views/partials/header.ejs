@@ -1,0 +1,31 @@
+<header>
+    <nav>
+        <ul class="flex">
+            <li>
+                <a href="/">Inicio</a>
+            </li>
+            
+            <% if(user != null){ %>
+
+                <form action="/users/logout" method="POST">
+                    <button>
+                        Cerrar sesión
+                    </button>
+                </form>
+
+                <li>
+                    Bienvenido <%= user %>
+                </li>
+
+            <% } else { %> 
+            
+                <li>
+                    <a href="/users/login">Iniciar sesión</a>
+                </li><li>
+                    <a href="/users/register">Registrarse</a>
+                </li>
+            
+            <% } %>
+        </ul>
+    </nav>
+</header>

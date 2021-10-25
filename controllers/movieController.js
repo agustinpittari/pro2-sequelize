@@ -42,7 +42,7 @@ const movieController = {
                 ['rating','ASC']
             ],
             limit:5,
-            offset:5
+            offset:0
         })
         .then( movies => {
             return res.send(movies);

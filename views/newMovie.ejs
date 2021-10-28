@@ -5,7 +5,7 @@
 <body>
     <%- include("./partials/header") %> 
 
-    <form action="/movies/newPost" method="POST">
+    <form action="/movies/newPost" method="POST" enctype="multipart/form-data">
         <label for="">Titulo</label><input type="text" name="title"><br>
         <label for="">Rating</label><input type="text" name="rating"><br>
         <label for="">Premios</label><input type="text" name="awards"><br>
@@ -18,7 +18,8 @@
                 <option value=<%= genres[i].id %> ><%= genres[i].name %></option>
 
             <% } %>  
-        </select>
+        </select><br>
+        <input type="file" name="movie" accept="image/png, image/jpg">
         <button>Enviar</button>
     </form>
 </body>

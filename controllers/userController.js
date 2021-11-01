@@ -23,33 +23,48 @@ let userController = {
         })
     },
     login: function(req,res){
-        res.render('login')
+        if(req.session.user == undefined){
+            res.render('login')
+        } else {
+            res.redirect("/")
+        }
     },
     processLogin: function(req,res){
-        db.User.findOne({
-            where : {
-                email: req.body.email
-            }
-        })
-        .then(user => {
-            if(user != undefined){
-                let passwordCorrecta = bcrypt.compareSync(req.body.password, user.password)
-                if(passwordCorrecta == true){
-                    req.session.user = user.email
-                    if(req.body.recordame){
-                        res.cookie("usuarioId", user.id, {maxAge: 1000 * 60 * 30})
-                    }
-                    res.redirect("/")
-                }else {
-                    res.send("Credenciales invalidas")
-                }
 
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.send(err)
-        })
+        let errors = {}
+
+        if(req.body.email == ""){
+            errors.message = "El campo de email no puede estar vacio";
+            res.locals.error = errors;
+            res.render("login");
+        } else {
+
+            db.User.findOne({
+                where : {
+                    email: req.body.email
+                }
+            })
+            .then(user => {
+                if(user != undefined){
+                    let passwordCorrecta = bcrypt.compareSync(req.body.password, user.password)
+                    if(passwordCorrecta == true){
+                        req.session.user = user.email
+                        if(req.body.recordame){
+                            res.cookie("usuarioId", user.id, {maxAge: 1000 * 60 * 30})
+                        }
+                        res.redirect("/")
+                    }else {
+                        res.send("Credenciales invalidas")
+                    }
+    
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.send(err)
+            })
+        }
+
     },
     logout: function(req, res){
 

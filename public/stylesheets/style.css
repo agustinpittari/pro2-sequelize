@@ -15,3 +15,8 @@ ul.flex {
   display: flex;
   justify-content: space-between;
 }
+
+.error {
+  color: red;
+  background-color: black;
+}

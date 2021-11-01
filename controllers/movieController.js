@@ -137,6 +137,14 @@ const movieController = {
         .then(movie => {
             res.redirect('/movies')
         })
+    },
+    demo: function(req,res){
+        db.Movie.findAll({
+            include: [{association: "genero"}, {association: "actores"}]
+        })
+        .then(peliculas => {
+            res.send(peliculas)
+        })
     }
 }
 

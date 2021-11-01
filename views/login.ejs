@@ -6,6 +6,10 @@
     <%- include("./partials/header") %> 
 
     <form action="/users/login" method="POST">
+        <% if(locals.error != undefined) {%>
+            <p class="error"><%= error.message %></p>
+        <% } %>  
+        <p></p>
         <label for="">Email</label><input type="email" name="email">
         <label for="">Password</label><input type="password" name="password"><br>
         <label for="">Recordar usuario</label><input type="checkbox" name="recordame" id="">

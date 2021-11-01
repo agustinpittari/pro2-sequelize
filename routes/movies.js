@@ -11,6 +11,8 @@ router.get('/bygenre', movieController.byGenre);
 router.get('/new', movieController.create);
 router.get('/edit/:id', movieController.edit);
 router.get('/detail/:id', movieController.detail);
+router.get('/relaciones', movieController.demo);
+
 
 router.post('/newPost', movieController.store)
 router.post('/edit/:id', movieController.update)

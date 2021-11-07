@@ -72,6 +72,7 @@ const movieController = {
         })
     },
     store: function(req, res){
+        //res.send(req.file)
 
         db.Movie.create({
             title: req.body.title,
@@ -79,7 +80,8 @@ const movieController = {
             rating: req.body.rating,
             release_date: req.body.release_date,
             genre_id: req.body.genre_id,
-            length: req.body.length
+            length: req.body.length,
+            images: req.file.filename
         })
         .then(movie => {
             res.redirect('/movies')
@@ -115,7 +117,8 @@ const movieController = {
             rating: req.body.rating,
             release_date: req.body.release_date,
             genre_id: req.body.genre_id,
-            length: req.body.length
+            length: req.body.length,
+            images: req.file.filename
         },
         {
             where: {

@@ -1,7 +1,21 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
+const multer = require('multer');
+const path = require('path');
 
 const movieController = require('../controllers/movieController')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images/movies')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+  })
+  
+  const upload = multer({ storage: storage })
+
 
 /* GET users listing. */
 router.get('/', movieController.index);
@@ -14,8 +28,8 @@ router.get('/detail/:id', movieController.detail);
 router.get('/relaciones', movieController.demo);
 
 
-router.post('/newPost', movieController.store)
-router.post('/edit/:id', movieController.update)
+router.post('/newPost', upload.single("movie"), movieController.store)
+router.post('/edit/:id', upload.single("movie"),movieController.update)
 router.post('/delete/:id', movieController.delete)
 
 

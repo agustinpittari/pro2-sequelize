@@ -27,6 +27,22 @@ module.exports = function(sequelize, dataTypes){
 
     const User = sequelize.define(alias, cols, config)
     //Creo la relacion de muchos a muchos entre Usuarios y usuarios utilizando la tabla intermedia Followers
+    User.associate = function(models){
+        User.belongsToMany(models.User, {
+            as:"seguido",
+            through: "seguidores",
+            foreignKey: "seguidor",
+            otherKey: "seguido",
+            timestamps: false
+        })
+        User.belongsToMany(models.User, {
+            as:"seguidor",
+            through: "seguidores",
+            foreignKey: "seguido",
+            otherKey: "seguidor",
+            timestamps: false
+        })
+    }
     //para que al generar las consultas pueda validar si un usuario sigue a otro
 
     return User

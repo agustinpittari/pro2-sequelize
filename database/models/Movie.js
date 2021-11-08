@@ -28,9 +28,9 @@ module.exports = function(sequelize, dataTypes){
         genre_id:{
             type: dataTypes.INTEGER,
         },
-        images: {
-            type: dataTypes.STRING
-        }
+        // images: {
+        //     type: dataTypes.STRING
+        // }
     }
 
     let configuracionDeLaTabla = {

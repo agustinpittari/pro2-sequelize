@@ -3,14 +3,21 @@
 <%- include("./partials/head") %>
 <body>
     <%- include("./partials/header") %>
-    <h1>Perfil de <%= profile.name %> </h1>
+
+    <h1>Perfil de <%= detail.name %></h1>
+
+
+
 
     <!-- Valido si el usuario con session sigue al usuario del perfil visto -->
-    <% if(/* lo sigue */) { %>
-        <!-- Muestro boton de seguir -->
-    <% } else { %>
-        <!-- Muestro boton de dejar de seguir -->
-    <% } %>  
-    
+    <%  if( loSigue) { %>
+        <form action="/users/dejarSeguir/<%= detail.id %> " method="POST">
+            <button>Dejar de seguir</button>
+        </form>
+    <%  } else { %>
+        <form action="/users/seguir/<%= detail.id %> " method="POST">
+            <button>Seguir</button>
+        </form>
+    <%  } %>  
 </body>
 </html>

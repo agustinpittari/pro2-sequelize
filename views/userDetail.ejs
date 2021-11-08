@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head") %>
+<body>
+    <%- include("./partials/header") %>
+    <h1>Perfil de <%= profile.name %> </h1>
+
+    <!-- Valido si el usuario con session sigue al usuario del perfil visto -->
+    <% if(/* lo sigue */) { %>
+        <!-- Muestro boton de seguir -->
+    <% } else { %>
+        <!-- Muestro boton de dejar de seguir -->
+    <% } %>  
+    
+</body>
+</html>

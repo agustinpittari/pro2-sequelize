@@ -1,0 +1,1 @@
+//Creo el modelo de Follower para generar la entidad y poder utilizar los metodos create y destroy

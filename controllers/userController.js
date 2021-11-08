@@ -1,8 +1,8 @@
 let db = require('../database/models')
 let bcrypt = require('bcryptjs')
+const op = db.Sequelize.Op
 
 let userController = {
-
     register: function(req, res){
         res.render('register')
     },
@@ -48,7 +48,8 @@ let userController = {
                 if(user != undefined){
                     let passwordCorrecta = bcrypt.compareSync(req.body.password, user.password)
                     if(passwordCorrecta == true){
-                        req.session.user = user.email
+                        delete user.password
+                        req.session.user = user
                         if(req.body.recordame){
                             res.cookie("usuarioId", user.id, {maxAge: 1000 * 60 * 30})
                         }
@@ -64,7 +65,7 @@ let userController = {
                 res.send(err)
             })
         }
-
+        
     },
     logout: function(req, res){
 
@@ -72,7 +73,31 @@ let userController = {
         res.clearCookie("usuarioId");
 
         res.redirect("/users/login")
-    }
+    },
+    //Crear metodo de detalle de usuario, buscandolo por el parametro de la ruta
+    detail: function(req, res){
+        //Busco al usuario por el parametro
+        
+        //Verifico si el usuario encontrao es seguido por el usuario en sesion
+    },
+    //Crear metodo de perfil, buscandolo por el id de la session del usuario y validar que la misma exista
+    profile: function(req, res){
+        //Valido si existe session
+        //Busco al usuario por el id de la session y envio sus datos a la vista
+    },
+    //Crear metodo follow que permita crear un registro en la tabla intermedia
+    follow: function(req, res){
+        //Valido si existe session
+
+        //Creo el registro en la tabla Seguidores
+
+    },
+    //Crear metodo unfollow que permita eliminar un registro en la tabla intermedia
+    unfollow: function(req, res){
+        //Valido si existe session
+
+        //Elimino con el metodo destroy el registro de la tabla intermedia
+    },
 
 }
 

@@ -12,9 +12,11 @@
                         Cerrar sesión
                     </button>
                 </form>
-
                 <li>
-                    Bienvenido <%= user %>
+                    <a href="/users/profile">Perfil</a>
+                </li>
+                <li>
+                    Bienvenido <%= user.name %>
                 </li>
 
             <% } else { %> 
